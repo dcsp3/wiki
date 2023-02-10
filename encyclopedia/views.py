@@ -1,5 +1,5 @@
-from django.urls import reverse
-from django.http import HttpResponseRedirect
+import random
+
 from django.shortcuts import render, redirect
 
 from . import util
@@ -34,3 +34,7 @@ def new_entry(request):
             return render(request, "encyclopedia/error_same.html", {
         })
     return render(request, "encyclopedia/new_entry.html")
+
+def random_entry(request):
+    entries = util.list_entries()
+    return redirect("entry", random.choice(entries))
