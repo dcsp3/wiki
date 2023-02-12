@@ -44,4 +44,12 @@ def search(request):
     if query in util.list_entries():
         return redirect("entry", query)
     else:
-        return redirect("index")
+        entries = [x for x in util.list_entries() if query in x]
+        if len(entries) != 0:
+            return render(request, "encyclopedia/search.html", {
+                "query": query,
+                "entries": entries
+            })
+        else:
+            return render(request, "encyclopedia/error_invalid.html", {
+        })
