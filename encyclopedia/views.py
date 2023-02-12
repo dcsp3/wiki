@@ -38,3 +38,10 @@ def new_entry(request):
 def random_entry(request):
     entries = util.list_entries()
     return redirect("entry", random.choice(entries))
+
+def search(request):
+    query = request.POST.get('q')
+    if query in util.list_entries():
+        return redirect("entry", query)
+    else:
+        return redirect("index")
