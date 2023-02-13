@@ -1,6 +1,7 @@
 import random
+import markdown2
 
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect, render
 
 from . import util
 
@@ -13,9 +14,10 @@ def index(request):
 def entry(request, title):
 
     if title in util.list_entries():
+        content = util.get_entry(title)
         return render(request, "encyclopedia/entry.html", {
             "title": title,
-            "content": util.get_entry(title)
+            "content": markdown2.markdown(content)
         })
 
     else:
