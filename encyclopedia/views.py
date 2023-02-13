@@ -53,3 +53,16 @@ def search(request):
         else:
             return render(request, "encyclopedia/error_invalid.html", {
         })
+
+def edit(request, title):
+    if request.method == "POST":
+        d = request.POST.dict()
+        content = d["content"]
+        util.save_entry(title, content)
+        return redirect("entry", title)
+
+    else:
+        return render(request, "encyclopedia/edit.html", {
+            "title": title,
+            "content": util.get_entry(title)
+        })

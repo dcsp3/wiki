@@ -8,4 +8,5 @@ urlpatterns = [
     path("search", views.search, name="search"),
     path("create", views.new_entry, name="create"),
     path("<str:title>", views.entry, name="entry"),
+    path("<str:title>/edit", views.edit, name="edit"),
 ]
